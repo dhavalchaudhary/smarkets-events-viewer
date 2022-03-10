@@ -47,17 +47,23 @@ export const PopularEventsViewer: React.FC<PopularEventsViewerProps> = (
     props.popularEventIds,
     props.eventsData
   )
-  
+
   return (
     <div className="popular-events-page-wrapper">
-      <h1 className="popular-events-category-title">Popular Events</h1>
-      <div>
-        {eventIdsToBeDisplayed.map((id) => (
-          <Link to={`/event/${id}`} className="link" key={id}>
-            <h2 className="title">{props.eventsData[id].name}</h2>
-          </Link>
-        ))}
-      </div>
+      {loading ? (
+        <h1 className="title loading-title">Loading...</h1>
+      ) : (
+        <>
+          <h1 className="popular-events-category-title">Popular Events</h1>
+          <div>
+            {eventIdsToBeDisplayed.map((id) => (
+              <Link to={`/event/${id}`} className="link" key={id}>
+                <h2 className="title">{props.eventsData[id].name}</h2>
+              </Link>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   )
 }
