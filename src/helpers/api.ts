@@ -1,6 +1,16 @@
 import { AllEventsData, EventDataAPIResponse } from '../types'
 
 export const transformEventAPIResponse = (
+  apiResponse: EventDataAPIResponse['events'][0]
+): AllEventsData => ({
+  [apiResponse.id]: {
+    name: apiResponse.name,
+    startDateTime: apiResponse.start_datetime,
+    status: apiResponse.state,
+    type: apiResponse.type
+  }
+})
+export const transformMultipleEventsAPIResponse = (
   allEventsPromiseResponses: PromiseSettledResult<
     EventDataAPIResponse['events'][0]
   >[]
@@ -11,12 +21,7 @@ export const transformEventAPIResponse = (
         const { value } = apiResponse
         return {
           ...obj,
-          [value.id]: {
-            name: value.name,
-            startDateTime: value.start_datetime,
-            status: value.state,
-            type: value.type
-          }
+          ...transformEventAPIResponse(value)
         }
       } else {
         return obj

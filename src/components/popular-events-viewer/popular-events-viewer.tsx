@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   getEventIdsWithData,
-  isPopularEventDataPresent,
-  transformEventAPIResponse
+  isEventsDataPresent,
+  transformMultipleEventsAPIResponse
 } from '../../helpers'
 import { fetchEventData } from '../../provider/fetch-event-data'
 import { fetchPopularEventsIds } from '../../provider/fetch-popular-events-ids'
@@ -29,7 +29,7 @@ export const PopularEventsViewer: React.FC<PopularEventsViewerProps> = (
       const allEventsDataResponse = await Promise.allSettled(
         allEventsDataPromises
       )
-      const formattedEventsData = transformEventAPIResponse(
+      const formattedEventsData = transformMultipleEventsAPIResponse(
         allEventsDataResponse
       )
 
@@ -38,7 +38,7 @@ export const PopularEventsViewer: React.FC<PopularEventsViewerProps> = (
       setLoading(false)
     }
 
-    if (isPopularEventDataPresent(props.popularEventIds, props.eventsData)) {
+    if (isEventsDataPresent(props.popularEventIds, props.eventsData)) {
       fetchAllData()
     }
   }, [])

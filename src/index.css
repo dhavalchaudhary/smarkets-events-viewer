@@ -36,3 +36,24 @@ body {
 .loading-title {
   text-align: center;
 }
+
+.event-details-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin: 10%;
+}
+.event-details-wrapper {
+  margin-top: 75px;
+}
+.back-btn-link {
+  display: inline-block;
+  color: inherit;
+  background-color: transparent;
+}
+.first-column {
+  padding: 10px 100px 10px 0px;
+}
+.second-column {
+  text-transform: capitalize;
+}
