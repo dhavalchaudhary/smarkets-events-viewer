@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
+  getEventIdsWithData,
   isPopularEventDataPresent,
   transformEventAPIResponse
 } from '../../helpers'
@@ -18,6 +20,7 @@ export const PopularEventsViewer: React.FC<PopularEventsViewerProps> = (
   props
 ) => {
   const [loading, setLoading] = useState(false)
+
   useEffect(() => {
     async function fetchAllData() {
       setLoading(true)
@@ -39,7 +42,22 @@ export const PopularEventsViewer: React.FC<PopularEventsViewerProps> = (
       fetchAllData()
     }
   }, [])
+
+  const eventIdsToBeDisplayed = getEventIdsWithData(
+    props.popularEventIds,
+    props.eventsData
+  )
+  
   return (
-    <h1 style={{ fontSize: 100 }}>{loading ? 'Loading' : 'Check console'}</h1>
+    <div className="popular-events-page-wrapper">
+      <h1 className="popular-events-category-title">Popular Events</h1>
+      <div>
+        {eventIdsToBeDisplayed.map((id) => (
+          <Link to={`/event/${id}`} className="link" key={id}>
+            <h2 className="title">{props.eventsData[id].name}</h2>
+          </Link>
+        ))}
+      </div>
+    </div>
   )
 }
