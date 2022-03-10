@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
-import { mockEventsData, mockPopularEventIds } from '../../mocks'
 import { EventId, AllEventsData } from '../../types'
 import { EventDetailViewer } from '../event-detail-viewer'
 import { PopularEventsViewer } from '../popular-events-viewer'
 
 export const App = () => {
   const [popularEventsIds, setPopularEventsIds] =
-    useState<EventId[]>(mockPopularEventIds)
-  const [eventsData, setEventsData] = useState<AllEventsData>(mockEventsData)
+    useState<EventId[]>([])
+  const [eventsData, setEventsData] = useState<AllEventsData>({})
   return (
     <BrowserRouter>
       <Route
