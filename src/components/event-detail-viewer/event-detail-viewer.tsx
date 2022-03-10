@@ -11,24 +11,41 @@ interface EventDetailViewerProps extends RouteComponentProps<{ id: string }> {
 
 export const EventDetailViewer: React.FC<EventDetailViewerProps> = (props) => {
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
   useEffect(() => {
     async function fetchData() {
-      setLoading(true)
-      const { id } = props.match.params
-      const data = await fetchEventData(id)
-      props.onUpdateEventData(transformEventAPIResponse(data))
-      setLoading(false)
+      try {
+        setLoading(true)
+        setError(false)
+        const { id } = props.match.params
+        const data = await fetchEventData(id)
+        props.onUpdateEventData(transformEventAPIResponse(data))
+        setLoading(false)
+      } catch (err) {
+        setLoading(false)
+        setError(true)
+      }
     }
 
     if (!props.data) {
       fetchData()
     }
+  
+  // eslint-disable-next-line
   }, [])
+
+  const isLoading = loading && !error
+  const isError = !loading && error
+  const isDataValid = !loading && !error && props.data
   return (
     <div className="event-details-page-wrapper">
-      {loading && !props.data ? (
-        <h1 className="title loading-title">Loading...</h1>
-      ) : (
+      {isLoading && <h1 className="title loading-title">Loading...</h1>}
+      {isError && (
+        <h1 className="title error-title">
+          There was an error in getting the data. Please reload the screen.
+        </h1>
+      )}
+      {isDataValid && (
         <>
           <Link to="/" className="back-btn-link">
             <h2 className="title">Back</h2>

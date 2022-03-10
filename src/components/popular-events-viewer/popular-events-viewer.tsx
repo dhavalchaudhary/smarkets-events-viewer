@@ -20,39 +20,52 @@ export const PopularEventsViewer: React.FC<PopularEventsViewerProps> = (
   props
 ) => {
   const [loading, setLoading] = useState(false)
-
+  const [error, setError] = useState(false)
   useEffect(() => {
     async function fetchAllData() {
-      setLoading(true)
-      const popularEventIdsData = await fetchPopularEventsIds('football')
-      const allEventsDataPromises = popularEventIdsData.map(fetchEventData)
-      const allEventsDataResponse = await Promise.allSettled(
-        allEventsDataPromises
-      )
-      const formattedEventsData = transformMultipleEventsAPIResponse(
-        allEventsDataResponse
-      )
-
-      props.onUpdatePopularEventsIds(popularEventIdsData)
-      props.onUpdateEventsData(formattedEventsData)
-      setLoading(false)
+      try {
+        setLoading(true)
+        setError(false)
+        const popularEventIdsData = await fetchPopularEventsIds('football')
+        const allEventsDataPromises = popularEventIdsData.map(fetchEventData)
+        const allEventsDataResponse = await Promise.allSettled(
+          allEventsDataPromises
+        )
+        const formattedEventsData = transformMultipleEventsAPIResponse(
+          allEventsDataResponse
+        )
+        props.onUpdatePopularEventsIds(popularEventIdsData)
+        props.onUpdateEventsData(formattedEventsData)
+        setLoading(false)
+      } catch (err) {
+        setLoading(false)
+        setError(true)
+      }
     }
 
     if (isEventsDataPresent(props.popularEventIds, props.eventsData)) {
       fetchAllData()
     }
+  
+    // eslint-disable-next-line
   }, [])
 
   const eventIdsToBeDisplayed = getEventIdsWithData(
     props.popularEventIds,
     props.eventsData
   )
-
+  const isLoading = loading && !error
+  const isError = !loading && error
+  const isDataValid = !loading && !error && eventIdsToBeDisplayed.length
   return (
     <div className="popular-events-page-wrapper">
-      {loading ? (
-        <h1 className="title loading-title">Loading...</h1>
-      ) : (
+      {isLoading && <h1 className="title loading-title">Loading...</h1>}
+      {isError && (
+        <h1 className="title error-title">
+          There was an error in getting the data. Please reload the screen.
+        </h1>
+      )}
+      {isDataValid && (
         <>
           <h1 className="popular-events-category-title">Popular Events</h1>
           <div>
