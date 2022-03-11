@@ -1,4 +1,4 @@
-import { AllEventsData, EventId } from '../types'
+import { AllEventsData, EventId } from '../../types'
 
 export const getEventIdsWithData = (
   popularEventIds: EventId[],

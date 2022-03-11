@@ -1,4 +1,4 @@
-import { AllEventsData, EventDataAPIResponse } from '../types'
+import { AllEventsData, EventDataAPIResponse } from '../../types'
 
 export const transformEventAPIResponse = (
   apiResponse: EventDataAPIResponse['events'][0]
