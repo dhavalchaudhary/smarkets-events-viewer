@@ -4,37 +4,37 @@ import { App } from './app'
 import { MemoryRouter } from 'react-router-dom'
 import { fetchEventData } from '../../provider/fetch-event-data'
 import {fetchPopularEventsIds} from '../../provider/fetch-popular-events-ids'
+import { mockEventDataAPIResponse, mockPopularEventIds } from '../../mocks'
 
-jest.mock('../../provider/fetch-event-data', () => ({
-  ...jest.requireActual('../../provider/fetch-event-data'),
-  fetchEventData: jest.fn()
-}))
+jest.mock('../../provider/fetch-event-data')
+jest.mock('../../provider/fetch-popular-events-ids')
 
-jest.mock('../../provider/fetch-popular-events-ids', () => ({
-  ...jest.requireActual('../../provider/fetch-popular-events-ids'),
-  fetchPopularEventsIds: jest.fn()
-}))
 
 describe('App', () => {
   it('loads the popular events page by default', async () => {
 
-    (fetchPopularEventsIds as jest.Mock).mockRejectedValue('Error')
+    const mockPopularEventIdsApiResponse = [mockPopularEventIds[0]];
+    (fetchPopularEventsIds as jest.Mock).mockResolvedValue(mockPopularEventIdsApiResponse);
+    (fetchEventData as jest.Mock).mockResolvedValue(mockEventDataAPIResponse);
+    
     
     render(<MemoryRouter><App /></MemoryRouter>)
     expect(window.location.pathname).toStrictEqual("/")
     expect(screen.getByTestId('popular-events-page')).toBeTruthy()
 
     await waitForElementToBeRemoved(screen.getByText(/loading/i))
-    expect(screen.getByText(/There was an error in getting the data./i)).toBeVisible()
+
+    expect(screen.getByText(mockEventDataAPIResponse.name)).toBeVisible()
   })
   it('loads the event details if the url is valid', async () => {
-    (fetchEventData as jest.Mock).mockRejectedValue('Error')
+    const mockEventId = mockEventDataAPIResponse.id;
+    (fetchEventData as jest.Mock).mockResolvedValue(mockEventDataAPIResponse);
 
-    render(<MemoryRouter initialEntries={['/event/1']}><App /></MemoryRouter>)
+    render(<MemoryRouter initialEntries={[`/event/${mockEventId}`]}><App /></MemoryRouter>)
     expect(screen.getByTestId('event-details-page')).toBeTruthy()
 
     await waitForElementToBeRemoved(screen.getByText(/loading/i))
 
-    expect(screen.getByText(/There was an error in getting the data./i)).toBeVisible()
+    expect(screen.getByText(mockEventDataAPIResponse.name)).toBeVisible()
   })
 })

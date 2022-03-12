@@ -7,15 +7,8 @@ import {fetchEventData} from '../../provider/fetch-event-data';
 import {fetchPopularEventsIds} from '../../provider/fetch-popular-events-ids'
 import { transformEventAPIResponse } from '../../helpers'
 
-jest.mock("../../provider/fetch-event-data", () => ({
-  ...jest.requireActual("../../provider/fetch-event-data"),
-  fetchEventData: jest.fn()
-}))
-
-jest.mock("../../provider/fetch-popular-events-ids", () => ({
-  ...jest.requireActual("../../provider/fetch-popular-events-ids"),
-  fetchPopularEventsIds: jest.fn()
-}))
+jest.mock("../../provider/fetch-event-data")
+jest.mock("../../provider/fetch-popular-events-ids")
 
 
 const mockEventId = mockPopularEventIds[0];

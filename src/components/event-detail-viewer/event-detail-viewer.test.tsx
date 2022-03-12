@@ -7,10 +7,7 @@ import { EventData } from '../../types';
 import {fetchEventData} from '../../provider/fetch-event-data';
 import { transformEventAPIResponse } from '../../helpers';
 
-jest.mock("../../provider/fetch-event-data", () => ({
-  ...jest.requireActual("../../provider/fetch-event-data"),
-  fetchEventData: jest.fn()
-}))
+jest.mock("../../provider/fetch-event-data")
 
 const mockEventId = mockPopularEventIds[0];
 
