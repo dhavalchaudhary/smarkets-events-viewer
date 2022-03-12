@@ -1,4 +1,4 @@
-import { CORS_ANYWHERE_URL, EVENT_BASE_URL } from '../../constants/api'
+import { CORS_ANYWHERE_URL, EVENT_BASE_URL } from '../../constants'
 import { EventDataAPIResponse, EventId } from '../../types'
 
 export const fetchEventData = async (id: EventId) => {

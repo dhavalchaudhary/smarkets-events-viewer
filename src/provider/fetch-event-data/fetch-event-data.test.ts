@@ -1,4 +1,4 @@
-import { CORS_ANYWHERE_URL, EVENT_BASE_URL } from '../../constants/API'
+import { CORS_ANYWHERE_URL, EVENT_BASE_URL } from '../../constants'
 import { mockEventsData } from '../../mocks'
 import { fetchEventData } from './fetch-event-data'
 

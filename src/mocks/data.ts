@@ -22,9 +22,9 @@ export const mockEventsData: AllEventsData = {
     type: 'football_match'
   },
   '42636774': {
-    name: 'Leeds United vs Aston Villa',
-    startDateTime: '2022-03-10T19:45:00Z',
-    status: 'upcoming',
+    name: 'Porto vs. Liverpool',
+    startDateTime: '2019-04-17T19:00:00Z',
+    status: 'ended',
     type: 'football_match'
   },
   '42637348': {

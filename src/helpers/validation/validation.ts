@@ -7,9 +7,9 @@ export const getEventIdsWithData = (
   return popularEventIds.filter((id) => eventsData.hasOwnProperty(id))
 }
 
-export const isEventsDataPresent = (
+export const isAllEventsDataPresent = (
   eventIds: EventId[],
   eventsData: AllEventsData
 ) => {
-  return getEventIdsWithData(eventIds, eventsData).length === 0
+  return getEventIdsWithData(eventIds, eventsData).length === eventIds.length
 }

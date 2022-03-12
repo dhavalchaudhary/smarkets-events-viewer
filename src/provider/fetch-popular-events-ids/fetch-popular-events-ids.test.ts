@@ -1,4 +1,4 @@
-import { CORS_ANYWHERE_URL, POPULAR_EVENTS_BASE_URL } from '../../constants/API'
+import { CORS_ANYWHERE_URL, POPULAR_EVENTS_BASE_URL } from '../../constants'
 import { mockPopularEventIds } from '../../mocks'
 import { fetchPopularEventsIds } from './fetch-popular-events-ids'
 
