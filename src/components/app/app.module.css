@@ -19,3 +19,14 @@
   text-align: center;
   font-size: 36px;
 }
+
+.link {
+  display: block;
+  margin: 15px 0px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

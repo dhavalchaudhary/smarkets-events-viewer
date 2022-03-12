@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  fireEvent,
   render,
   screen,
   waitForElementToBeRemoved
@@ -47,5 +48,21 @@ describe('App', () => {
     await waitForElementToBeRemoved(screen.getByText(/loading/i))
 
     expect(screen.getByText(mockEventDataAPIResponse.name)).toBeVisible()
+  })
+
+  it('loads not found page on an invalid url', async () => {
+    (fetchPopularEventsIds as jest.Mock).mockRejectedValue('error')
+
+    render(<MemoryRouter initialEntries={["/error"]}><App /></MemoryRouter>)
+
+    fireEvent.click(screen.getByTestId('home-link'))
+
+    expect(screen.getByTestId('popular-events-page')).toBeTruthy()
+
+    await waitForElementToBeRemoved(screen.getByText(/loading/i))
+
+    expect(
+      screen.getByText(/there was an error in getting the data/i)
+    ).toBeVisible()
   })
 })

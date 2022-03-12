@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { EventId, AllEventsData } from '../../types'
 import { EventDetailViewer } from '../event-detail-viewer'
+import { NotFoundPage } from '../not-found-page'
 import { PopularEventsViewer } from '../popular-events-viewer'
 
 export const App = () => {
   const [popularEventsIds, setPopularEventsIds] = useState<EventId[]>([])
   const [eventsData, setEventsData] = useState<AllEventsData>({})
   return (
-    <>
+    <Switch>
       <Route
         exact
         path="/"
@@ -22,6 +23,7 @@ export const App = () => {
         )}
       />
       <Route
+        exact
         path="/event/:id"
         render={(props) => {
           const eventId = props.match.params.id
@@ -37,6 +39,7 @@ export const App = () => {
           )
         }}
       />
-    </>
+      <Route component={NotFoundPage} />
+    </Switch>
   )
 }
