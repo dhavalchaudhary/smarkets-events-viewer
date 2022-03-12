@@ -5,11 +5,10 @@ import { EventDetailViewer } from '../event-detail-viewer'
 import { PopularEventsViewer } from '../popular-events-viewer'
 
 export const App = () => {
-  const [popularEventsIds, setPopularEventsIds] =
-    useState<EventId[]>([])
+  const [popularEventsIds, setPopularEventsIds] = useState<EventId[]>([])
   const [eventsData, setEventsData] = useState<AllEventsData>({})
   return (
-    <BrowserRouter>
+    <>
       <Route
         exact
         path="/"
@@ -38,6 +37,6 @@ export const App = () => {
           )
         }}
       />
-    </BrowserRouter>
+    </>
   )
 }

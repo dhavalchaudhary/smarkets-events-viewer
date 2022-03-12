@@ -1,4 +1,4 @@
-import { CORS_ANYWHERE_URL, POPULAR_EVENTS_BASE_URL } from '../../constants/API'
+import { CORS_ANYWHERE_URL, POPULAR_EVENTS_BASE_URL } from '../../constants/api'
 import { PopularEventsIdsAPIResponse } from '../../types'
 
 export const fetchPopularEventsIds = async (sportType: string = 'football') => {

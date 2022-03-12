@@ -5,11 +5,10 @@ import {
   isEventsDataPresent,
   transformMultipleEventsAPIResponse
 } from '../../helpers'
-import { fetchEventData } from '../../provider/fetch-event-data'
-import { fetchPopularEventsIds } from '../../provider/fetch-popular-events-ids'
+import { fetchEventData, fetchPopularEventsIds } from '../../provider'
 import { AllEventsData, EventId } from '../../types'
 
-type PopularEventsViewerProps = {
+export type PopularEventsViewerProps = {
   popularEventIds: EventId[]
   eventsData: AllEventsData
   onUpdatePopularEventsIds: (popularEventIds: EventId[]) => void
@@ -24,10 +23,10 @@ export const PopularEventsViewer: React.FC<PopularEventsViewerProps> = (
   useEffect(() => {
     async function fetchAllData() {
       try {
-        setLoading(true)
+        setLoading(true)        
         setError(false)
-        const popularEventIdsData = await fetchPopularEventsIds('football')
-        const allEventsDataPromises = popularEventIdsData.map(fetchEventData)
+        const popularEventIdsData = await fetchPopularEventsIds()
+        const allEventsDataPromises = popularEventIdsData.map((id) => fetchEventData(id))
         const allEventsDataResponse = await Promise.allSettled(
           allEventsDataPromises
         )
@@ -46,7 +45,7 @@ export const PopularEventsViewer: React.FC<PopularEventsViewerProps> = (
     if (isEventsDataPresent(props.popularEventIds, props.eventsData)) {
       fetchAllData()
     }
-  
+
     // eslint-disable-next-line
   }, [])
 
@@ -58,7 +57,7 @@ export const PopularEventsViewer: React.FC<PopularEventsViewerProps> = (
   const isError = !loading && error
   const isDataValid = !loading && !error && eventIdsToBeDisplayed.length
   return (
-    <div className="popular-events-page-wrapper">
+    <div className="popular-events-page-wrapper" data-testid="popular-events-page">
       {isLoading && <h1 className="title loading-title">Loading...</h1>}
       {isError && (
         <h1 className="title error-title">
