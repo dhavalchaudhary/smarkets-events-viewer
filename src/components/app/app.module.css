@@ -1,0 +1,21 @@
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin: 10%;
+}
+.title {
+  font-size: 48px;
+  margin: 10px 0px;
+  cursor: pointer;
+  font-weight: 400;
+}
+.loadingTitle {
+  composes: title;
+  text-align: center;
+}
+.errorTitle {
+  composes: title;
+  text-align: center;
+  font-size: 36px;
+}

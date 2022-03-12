@@ -3,6 +3,10 @@ import { Link, RouteComponentProps } from 'react-router-dom'
 import { transformEventAPIResponse } from '../../helpers'
 import { fetchEventData } from '../../provider'
 import { AllEventsData, EventData } from '../../types'
+import customStyles from './event-detail-viewer.module.css'
+import baseStyles from '../app/app.module.css'
+
+const styles = { ...baseStyles, ...customStyles }
 
 export interface EventDetailViewerProps
   extends RouteComponentProps<{ id: string }> {
@@ -39,44 +43,44 @@ export const EventDetailViewer: React.FC<EventDetailViewerProps> = (props) => {
   const isError = !loading && error
   const isDataValid = !loading && !error && props.data
   return (
-    <div
-      className="event-details-page-wrapper"
-      data-testid="event-details-page">
-      {isLoading && <h1 className="title loading-title">Loading...</h1>}
+    <div className={styles.pageWrapper} data-testid="event-details-page">
+      {isLoading && <h1 className={styles.loadingTitle}>Loading...</h1>}
       {isError && (
-        <h1 className="title error-title">
+        <h1 className={styles.errorTitle}>
           There was an error in getting the data. Please reload the screen.
         </h1>
       )}
       {isDataValid && (
         <>
-          <Link to="/" className="back-btn-link">
-            <h2 className="title">Back</h2>
+          <Link to="/" className={styles.backBtnLink}>
+            <h2 className={styles.title}>Back</h2>
           </Link>
-          <div className="event-details-wrapper">
+          <div className={styles.eventDetailsWrapper}>
             <table>
               <tbody>
                 <tr>
-                  <td className="title first-column">Name</td>
-                  <td className="title second-column">{props.data?.name}</td>
+                  <td className={styles.eventDataTitle}>Name</td>
+                  <td className={styles.eventDataValue}>{props.data?.name}</td>
                 </tr>
                 <tr>
-                  <td className="title first-column">Type</td>
-                  <td className="title second-column">
+                  <td className={styles.eventDataTitle}>Type</td>
+                  <td className={styles.eventDataValue}>
                     {props.data?.type.replaceAll('_', ' ')}
                   </td>
                 </tr>
                 <tr>
-                  <td className="title first-column">Time</td>
-                  <td className="title second-column">
+                  <td className={styles.eventDataTitle}>Time</td>
+                  <td className={styles.eventDataValue}>
                     {new Date(
                       props.data?.startDateTime as string
                     ).toLocaleString()}
                   </td>
                 </tr>
                 <tr>
-                  <td className="title first-column">Status</td>
-                  <td className="title second-column">{props.data?.status}</td>
+                  <td className={styles.eventDataTitle}>Status</td>
+                  <td className={styles.eventDataValue}>
+                    {props.data?.status}
+                  </td>
                 </tr>
               </tbody>
             </table>

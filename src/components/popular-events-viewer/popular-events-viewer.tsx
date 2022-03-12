@@ -7,6 +7,10 @@ import {
 } from '../../helpers'
 import { fetchEventData, fetchPopularEventsIds } from '../../provider'
 import { AllEventsData, EventId } from '../../types'
+import customStyles from './popular-events-viewer.module.css'
+import baseStyles from '../app/app.module.css'
+
+const styles = { ...baseStyles, ...customStyles }
 
 export type PopularEventsViewerProps = {
   popularEventIds: EventId[]
@@ -63,22 +67,22 @@ export const PopularEventsViewer: React.FC<PopularEventsViewerProps> = (
   const isError = !loading && error
   const isDataValid = !loading && !error && eventIdsToBeDisplayed.length
   return (
-    <div
-      className="popular-events-page-wrapper"
-      data-testid="popular-events-page">
-      {isLoading && <h1 className="title loading-title">Loading...</h1>}
+    <div className={styles.pageWrapper} data-testid="popular-events-page">
+      {isLoading && <h1 className={styles.loadingTitle}>Loading...</h1>}
       {isError && (
-        <h1 className="title error-title">
+        <h1 className={styles.errorTitle}>
           There was an error in getting the data. Please reload the screen.
         </h1>
       )}
       {isDataValid && (
         <>
-          <h1 className="popular-events-category-title">Popular Events</h1>
+          <h1 className={styles.categoryTitle}>Popular Events: Football</h1>
           <div>
             {eventIdsToBeDisplayed.map((id) => (
-              <Link to={`/event/${id}`} className="link" key={id}>
-                <h2 className="title">{props.eventsData[id].name}</h2>
+              <Link to={`/event/${id}`} className={styles.link} key={id}>
+                <h2 className={styles.linkTitle}>
+                  {props.eventsData[id].name}
+                </h2>
               </Link>
             ))}
           </div>

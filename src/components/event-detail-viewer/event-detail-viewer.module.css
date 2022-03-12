@@ -1,0 +1,18 @@
+.backBtnLink {
+  display: inline-block;
+  color: inherit;
+  background-color: transparent;
+}
+
+.eventDetailsWrapper {
+  margin-top: 75px;
+}
+
+.eventDataTitle {
+  composes: title from '../app/app.module.css';
+  padding: 10px 100px 10px 0px;
+}
+.eventDataValue {
+  composes: title from '../app/app.module.css';
+  text-transform: capitalize;
+}

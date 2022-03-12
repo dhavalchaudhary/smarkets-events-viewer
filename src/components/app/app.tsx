@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
+import { mockEventsData, mockPopularEventIds } from '../../mocks'
 import { EventId, AllEventsData } from '../../types'
 import { EventDetailViewer } from '../event-detail-viewer'
 import { PopularEventsViewer } from '../popular-events-viewer'
