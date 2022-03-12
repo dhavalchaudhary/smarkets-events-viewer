@@ -1,46 +1,70 @@
-# Getting Started with Create React App
+# Smarkets Events Viewer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Contents of this documentation
 
-## Available Scripts
+1.  [Problem Statement](#problem-statement)
+2.  [Technical documentation for running the project](#technical-documentation-for-running-the-project)
+3.  [Scope for improvement](#scope-for-improvement)
 
-In the project directory, you can run:
+## Problem Statement
 
-### `npm start`
+Build an application that displays the popular events related to football and it's relevent info. The data can be fetched from the Smarkets events API - [popular events](https://api.smarkets.com/v3/popular/event_ids/sport/football/) and [event info](https://api.smarkets.com/v3/events/1824106/).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technical documentation for running the project
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Live site - https://smarkets-events-viewer.netlify.app/. For best experience, open the site on the browser.
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Ensure that the node package used in the machine `17.x.x`. Using the older versions might result into unforseen issues.
+- Ensure that you have `npm` installed in your machine. <br /> _Note - You can also use yarn for all the commands mentioned below by replacing `npm` or `npm run` with `yarn`_
 
-### `npm run build`
+### Running the project
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Install all the dependencies for the project.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```sh
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Start the project.
 
-### `npm run eject`
+```sh
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This will automatically open [http://localhost:3000](http://localhost:3000) on the browser and run the app in development mode. The page will reload if you make edits. You will also see any lint errors in the console.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If the API calls are resulting in an error, there is a very high chance that you do not have access to the cors-anywhere domain. To get access, go to [cors-anywhere](https://cors-anywhere.herokuapp.com/corsdemo) and click on the _"Request temporary access to the demo server"_ button. If the acees grant was succesful, you will see a _"You currently have temporary access to the demo server."_ message on the same page.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Running the tests
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+We use [Jest](https://jestjs.io/) and [React Testing Library](https://github.com/testing-library/react-testing-library) as the basic tools for unit and integration testing. To run all the tests, execute the following command in the terminal
 
-## Learn More
+```sh
+npm run test
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Formatting the code
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+We use prettier to format all the files according to the rules in `.prettierrc.json`. This keeps our code style consistent across the entire project. To format all the files, exceute the following command in the terminal
+
+```sh
+npm run prettier
+```
+
+## Scope for improvement
+
+This section contains potential topics to improve user experience and developer experience
+
+- Better User Experience by investing in design.
+- Developer Experience
+  - Testing
+    - Adding e2e tests using tools like [Cypress](https://www.cypress.io/). These tests replicate real world user scenarios thus increasing our confidence in the app.
+  - Monitoring and Alerting
+    - Integrating tools like [Sentry](https://sentry.io/) or [LogRocket](https://logrocket.com/) for error tracking
+    - Adding tools like [LogRocket](https://logrocket.com/) to track application performance metrics
+    - Setup automated alerts to catch bugs before they affect a significant user base.
+  - Automation
+    - Adding linters to the project to maintain a style consistency
+    - Introducing a CI/CD workflow using tools like [Github Actions](https://github.com/features/actions) or [Circle CI](https://circleci.com/). It will generate builds, run tests and deploy to testing environment when there are code changes on Github.
