@@ -23,10 +23,12 @@ export const PopularEventsViewer: React.FC<PopularEventsViewerProps> = (
   useEffect(() => {
     async function fetchAllData() {
       try {
-        setLoading(true)        
+        setLoading(true)
         setError(false)
         const popularEventIdsData = await fetchPopularEventsIds()
-        const allEventsDataPromises = popularEventIdsData.map((id) => fetchEventData(id))
+        const allEventsDataPromises = popularEventIdsData.map((id) =>
+          fetchEventData(id)
+        )
         const allEventsDataResponse = await Promise.allSettled(
           allEventsDataPromises
         )
@@ -57,7 +59,9 @@ export const PopularEventsViewer: React.FC<PopularEventsViewerProps> = (
   const isError = !loading && error
   const isDataValid = !loading && !error && eventIdsToBeDisplayed.length
   return (
-    <div className="popular-events-page-wrapper" data-testid="popular-events-page">
+    <div
+      className="popular-events-page-wrapper"
+      data-testid="popular-events-page">
       {isLoading && <h1 className="title loading-title">Loading...</h1>}
       {isError && (
         <h1 className="title error-title">

@@ -4,7 +4,8 @@ import { transformEventAPIResponse } from '../../helpers'
 import { fetchEventData } from '../../provider'
 import { AllEventsData, EventData } from '../../types'
 
-export interface EventDetailViewerProps extends RouteComponentProps<{ id: string }> {
+export interface EventDetailViewerProps
+  extends RouteComponentProps<{ id: string }> {
   data: EventData | null
   onUpdateEventData: (eventData: AllEventsData) => void
 }
@@ -38,7 +39,9 @@ export const EventDetailViewer: React.FC<EventDetailViewerProps> = (props) => {
   const isError = !loading && error
   const isDataValid = !loading && !error && props.data
   return (
-    <div className="event-details-page-wrapper" data-testid="event-details-page">
+    <div
+      className="event-details-page-wrapper"
+      data-testid="event-details-page">
       {isLoading && <h1 className="title loading-title">Loading...</h1>}
       {isError && (
         <h1 className="title error-title">
