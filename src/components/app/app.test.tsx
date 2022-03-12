@@ -51,9 +51,13 @@ describe('App', () => {
   })
 
   it('loads not found page on an invalid url', async () => {
-    (fetchPopularEventsIds as jest.Mock).mockRejectedValue('error')
+    ;(fetchPopularEventsIds as jest.Mock).mockRejectedValue('error')
 
-    render(<MemoryRouter initialEntries={["/error"]}><App /></MemoryRouter>)
+    render(
+      <MemoryRouter initialEntries={['/error']}>
+        <App />
+      </MemoryRouter>
+    )
 
     fireEvent.click(screen.getByTestId('home-link'))
 
