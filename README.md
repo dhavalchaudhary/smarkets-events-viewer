@@ -35,7 +35,7 @@ npm start
 
 This will automatically open [http://localhost:3000](http://localhost:3000) on the browser and run the app in development mode. The page will reload if you make edits. You will also see any lint errors in the console.
 
-If the API calls are resulting in an error, there is a very high chance that you do not have access to the cors-anywhere domain. To get access, go to [cors-anywhere](https://cors-anywhere.herokuapp.com/corsdemo) and click on the _"Request temporary access to the demo server"_ button. If the acees grant was succesful, you will see a _"You currently have temporary access to the demo server."_ message on the same page.
+If the API calls are resulting in an error, there is a very high chance that you do not have access to the cors-anywhere domain. To get access, go to [cors-anywhere](https://cors-anywhere.herokuapp.com/corsdemo) and click on the _"Request temporary access to the demo server"_ button. If the access grant was succesful, you will see a _"You currently have temporary access to the demo server."_ message on the same page.
 
 ### Running the tests
 
